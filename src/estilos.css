@@ -1,0 +1,23 @@
+* {
+    font-family:sans-serif;
+    margin:0;
+    padding:0;
+}
+
+#menu {
+    width:100vw;
+    height:50px;
+    background-color: plum;
+}
+
+#menu ul{
+    display: flex;
+    justify-content: start;
+    color: rgb(46, 46, 46);
+    list-style: none;
+}
+
+.pages {
+    margin: 10px 20px;
+    font-weight: 600;
+}
