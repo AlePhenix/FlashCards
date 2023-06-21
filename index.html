@@ -8,16 +8,30 @@
 </head>
 <body>
     <menu id="menu">
-        <ul>
-            <li class="pages">My pakages</li>
-            <li class="pages">Explore</li>
-            <li class="pages">My acount</li>
-            <li class="pages">News</li>
+        <img class="menu-icon" src="images/menu-hamburguesa.png" alt="Menu">
+        <img class="cruz-icon hidden" src="images/cruz.png" alt="Cruz">
+        <ul class="hidden menu-list ">
+            <li class="pages"><p>My pakages</p></li>
+            <li class="pages"><p>Explore</p></li>
+            <li class="pages"><p>My acount</p></li>
+            <li class="pages"><p>News</p></li>
         </ul>
     </menu>
-    <h1>Flash Cards</h1>
-    <p>Study fast and simple with Flash Cards</p>
-    <input type="text" id="Search">
-    <button id="addCardButton" class="buttom">Add a card</button>
+    <article id="main">
+        <section class="create-cards">
+            <h1 id="flashCards">Flash Cards</h1>
+            <p>Study fast and simple with Flash Cards</p>
+            <div id="cardsCreator">
+                
+            </div>
+        </section>
+        <section>
+            
+        </section>
+        <button id="createCardButton" class="button">
+            <img src="images/mas.png" alt="Crear">
+        </button>
+    </article>
+    <script src="src/button.js"></script>
 </body>
 </html>
