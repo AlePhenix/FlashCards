@@ -1,42 +1,50 @@
-const menuIcon = document.querySelector(".menu-icon");
-const cruzIcon = document.querySelector(".cruz-icon");
-const menuList = document.querySelector(".menu-list");
-const cardsCreator = document.getElementById("cardsCreator");
 const createButton = document.getElementById("createCardButton");
+const albumCreatorContainer = document.getElementById('albumCreatorContainer');
 
-menuIcon.addEventListener("click", openMenu);
-cruzIcon.addEventListener("click", openMenu);
+createButton.addEventListener('click', openAlbumCreator)
 
-createButton.addEventListener("click", openCreator);
-
-function openMenu() {
-    cruzIcon.classList.toggle("hidden");
-    menuIcon.classList.toggle("hidden");
-    menuList.classList.toggle("hidden");
-}
-
-function openCreator() {
-    cardsCreator.innerHTML = `
-        <button id="closeCardsCreator" class="close"><img class="icon" src="images/cruz.png" alt="Cruz"></button>
-        <h2>Crear una nueva Flash Card</h2>
-        <p>Primera parte</p>
-        <input class="principal-input" type="text" id="">
-        <p>Segunda parte</p>
-        <input class="principal-input" type="text" id="">
-        <button class="done">Listo</button>
+function openAlbumCreator() {
+    albumCreatorContainer.innerHTML = `
+        <ul id='albumCreator' class="">
+            <h2 class="title-h2 title-AC">Album Creator</h2>
+            <li  class='AC-inputs-container'>
+                <p class="content">Nombre del album</p>
+                <input class="principal-input AC-input" type="text">
+            </li>
+            <li class='AC-inputs-container'>
+                <p class="content ">Fondo del album</p>
+                <ul class="select-color-continer">
+                    <li class="select-color"></li>
+                    <li class="select-color"></li>
+                    <li class="select-color"></li>
+                    <li class="select-color"></li>
+                    <li class="select-color"></li>
+                    <li class="select-color"></li>
+                </ul>
+            </li>
+            <button id='doneAlbumCreatorButton' class="done-button button-AC">
+                <p class="content">Create</p>
+            </button>
+        </ul>
     `;
-    cardsCreator.classList.add("cards-creator");
-    createButton.classList.toggle("hidden");
+    var albumCreator = document.getElementById("albumCreator");
 
-
-    const closeCardsCreator = document.getElementById("closeCardsCreator");
-
-    closeCardsCreator.addEventListener("click", closeCreator);
-
+    albumCreator.classList.add('overlay-album')
+    albumCreatorContainer.classList.add('overlay-bkg')
 }
 
-function closeCreator() {
-    cardsCreator.innerHTML = "";
-    cardsCreator.classList.remove("cards-creator");
-    createButton.classList.toggle("hidden");
+
+
+albumCreatorContainer.addEventListener("click", closeOverlay);
+
+function closeOverlay(event) {
+    if (event.target === albumCreatorContainer) {
+        albumCreator.classList.add('move-out')
+        
+        setTimeout(() => {
+            albumCreatorContainer.classList.remove('overlay-bkg');
+            albumCreator.classList.remove('move-out')
+            albumCreatorContainer.innerHTML = ``;
+        }, 350);
+    }
 }
