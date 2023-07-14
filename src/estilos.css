@@ -114,7 +114,6 @@
 }
 
 #createCardButton {
-    justify-self: center;
     width: 80vw;
     height: 100px;
     border-radius: 5px;
@@ -191,6 +190,40 @@
 
 .button-AC {
     margin-top: 10px;
+}
+
+.library {
+    display: grid;
+    gap: 20px;
+    justify-content: center;
+    list-style: none;
+}
+.album {
+    position: relative;
+    width: 80vw;
+    height: 100px;
+    border-radius: 5px;
+    border: 2px solid var(--gray-30);
+    background-color: var(--pink);
+}
+.album a{
+    position: absolute;
+    width: 80vw;
+    height: 100px;
+    text-decoration: none;
+}
+.album h4{
+    margin: 15px;
+    color: var(--black);
+}
+.album img{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.album:hover {
+    opacity: .8;
 }
 
 @keyframes move-in {
