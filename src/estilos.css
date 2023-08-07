@@ -19,6 +19,7 @@
     --orange: #FFD3B5;
     --pink: #F8CAC6;
     --yellow: #FCE79E;
+    --red: #ffaaba; 
 
     --principal-LG:  linear-gradient(215deg, #5481db 0%, #7a49ca 100%);
     --secundary-LG:  linear-gradient(215deg, #4994da 0%, #a057d8 100%);
@@ -27,6 +28,7 @@
 
 * {
     font-family:sans-serif;
+    box-sizing:border-box;
     margin:0;
     padding:0;
 }
@@ -53,8 +55,8 @@
     color: var(--wihte);
 }
 .icon {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
 }
 .principal-input {
     padding: 0 10px 0 10px;
@@ -87,9 +89,15 @@
     animation-duration: 300ms;
     animation-fill-mode:forwards;
 }
+.cardsCounter{
+    font-size: 28px;
+    font-weight: bold;
+}
 
 
-
+#body {
+    overflow: hidden;
+}
 
 
 #main {
@@ -200,6 +208,9 @@
     list-style: none;
 }
 .album {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     position: relative;
     width: 80vw;
     height: 100px;
@@ -208,13 +219,19 @@
     background-color: var(--pink);
 }
 .album h4{
-    margin: 15px;
+    margin-left: 20px ;
     color: var(--black);
 }
 .album img{
     position: absolute;
     top: 10px;
     right: 10px;
+}
+.albumCounter {
+    margin-right: 40px;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--black);
 }
 
 .album:hover {
@@ -236,34 +253,28 @@
 
 .albumSlideHeader{
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: relative;
     width: 100%;
     height: 50px;
+    padding: 20px;
 }
-.backArrowIcon {
-    position: absolute;
-    top: 15px;
-    left: 10px;
-}
-.titleAlbumSLide {
-    position: absolute;
-    left: 50px;
-    top: 10px;
-}
-.cardsCounter {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-}
+.albumSlideHeader .headerSection{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
 
+}
 
 
 
 .flashCardsContainer{
     display:flex;
+    flex-wrap: wrap;
     justify-content: center;
     width: 100vw;
-    height: 100%;
 }
 .newFlashCardButton {
     display: flex;
@@ -281,6 +292,53 @@
 .newFlashCardButton:hover {
     background-color: var(--transparent-bk-select);
 }
+.flashCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 20px;
+    width: 80%;
+    height: 320px;
+    border-radius: 10px;
+    color: var(--wihte);
+    border: 2px solid var(--gray-70);
+    background-color: var(--gray-90);
+}
+.answer {
+    background-color: rgb(89, 89, 89);
+}
+.wrongAnswer {
+    background-color: var(--red);
+}
+.rightAnswer {
+    background-color: var(--green);
+}
+.flashCard img{
+    position: absolute;
+    bottom: 40px;
+    padding: 10px;
+    background-color: var(--gray-70);
+    border: 2px solid var(--gray-50);
+    border-radius: 50%;
+}
+.flashCard img:hover{
+    background-color: var(--gray-90);
+}
+.WoRbutton {
+    margin: 30px 10px;
+    width: 40%;
+    height: 60px;
+    border-radius: 8px;
+    border: 2px solid var(--gray-70);
+}
+.buttonWrong{
+    background-color: var(--pink);
+}
+.buttonRight{
+    background-color: var(--green);
+}
 
 
 
@@ -297,7 +355,11 @@
 .FCCreatorHeader {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 20px 15px;
+}
+#cardsMakerCounter {
+
 }
 .flashCardCreatorPage form {
 
@@ -314,8 +376,22 @@
     color: var(--wihte); 
     padding: 15px;
 }
-
-
+.saveAnimation {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: -120px;
+    right: 12px;
+    height: 80px;
+    width: 80px;
+    background-color: greenyellow;
+    border-radius: 50%;
+    animation-name: slide-in-out;
+    animation-duration: 1700ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode:forwards;
+}
 
 
 
@@ -331,13 +407,23 @@
         bottom: 0px;
     }
 }
-
-
 @keyframes move-out {
     from {
         bottom: -10px;
     }
     to{
         bottom: -350px;
+    }
+}
+@keyframes slide-in-out {
+    0% {}
+    30% {
+        bottom: 0;
+    }
+    80% {
+        bottom: 0;
+    }
+    100% {
+        bottom: -130px;
     }
 }
