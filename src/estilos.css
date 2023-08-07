@@ -8,6 +8,7 @@
     --gray-50: #afafaf;
     --gray-60: #919191;
     --gray-70: #646464;
+    --gray-80: #595959;
     --gray-90: #3b3b3b;
     
     --transparent-bk: #32323255;
@@ -292,53 +293,7 @@
 .newFlashCardButton:hover {
     background-color: var(--transparent-bk-select);
 }
-.flashCard{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    margin-top: 20px;
-    width: 80%;
-    height: 320px;
-    border-radius: 10px;
-    color: var(--wihte);
-    border: 2px solid var(--gray-70);
-    background-color: var(--gray-90);
-}
-.answer {
-    background-color: rgb(89, 89, 89);
-}
-.wrongAnswer {
-    background-color: var(--red);
-}
-.rightAnswer {
-    background-color: var(--green);
-}
-.flashCard img{
-    position: absolute;
-    bottom: 40px;
-    padding: 10px;
-    background-color: var(--gray-70);
-    border: 2px solid var(--gray-50);
-    border-radius: 50%;
-}
-.flashCard img:hover{
-    background-color: var(--gray-90);
-}
-.WoRbutton {
-    margin: 30px 10px;
-    width: 40%;
-    height: 60px;
-    border-radius: 8px;
-    border: 2px solid var(--gray-70);
-}
-.buttonWrong{
-    background-color: var(--pink);
-}
-.buttonRight{
-    background-color: var(--green);
-}
+
 
 
 
@@ -357,9 +312,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px 15px;
-}
-#cardsMakerCounter {
-
 }
 .flashCardCreatorPage form {
 
@@ -396,8 +348,69 @@
 
 
 
+.flashCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 20px;
+    width: 80%;
+    height: 320px;
+    border-radius: 10px;
+    color: var(--wihte);
+    border: 2px solid var(--gray-70);
+    background-color: var(--gray-90);
+}
+.flashCard img{
+    position: absolute;
+    bottom: 40px;
+    padding: 10px;
+    background-color: var(--gray-70);
+    border: 2px solid var(--gray-50);
+    border-radius: 50%;
+}
+.flashCard img:hover{
+    background-color: var(--gray-90);
+}
+.WoRbutton {
+    margin: 30px 10px;
+    width: 40%;
+    height: 60px;
+    border-radius: 8px;
+    border: 2px solid var(--gray-70);
+}
+.buttonWrong{
+    background-color: var(--pink);
+}
+.buttonRight{
+    background-color: var(--green);
+}
 
 
+
+.resultsPage{
+    justify-self: center;
+    width: 60vw;
+    height: 280px;
+    margin-top: 50px;
+    padding: 20px ;
+    border-radius: 20px;
+    border: 2px solid var(--gray-70);
+    color: var(--wihte);
+}
+.resultsPage h2{
+    margin:0 0 40px 15px;
+}
+.resultsPage p{
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+.resultsPage button{
+    margin-top: 10px;
+    font-size: 15px;
+    width: 100%;
+}
 
 
 @keyframes move-in {
