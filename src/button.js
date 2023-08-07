@@ -39,7 +39,7 @@ function openAlbumCreator() {
     const albumCreator = document.getElementById("albumCreator");
     const doneAlbumCreatorButton = document.getElementById("doneAlbumCreatorButton");
     const nameAlbumInput = document.getElementById("nameAlbumInput");
-    
+
     nameAlbumInput.focus();
     albumCreatorContainer.classList.add('overlay-bkg');
     assignEventListeners();
@@ -61,9 +61,10 @@ function closeOverlayTransition(){
 }
 function saveAlbum(){
     var counter = 0;
+    var actualCardCounter = 0;
     var arrayCards = [];
-    var wrongCards = [];
-    var rightCards = [];
+    var wrongCardsCounter = 0;
+    var rightCardsCounter = 0;
 
 
 
@@ -80,7 +81,7 @@ function saveAlbum(){
         const flashCardsContainer = document.getElementById("FlashCardsContainer");
         flashCardsContainer.innerHTML =  `
         <div id="FlashCard" class="flashCard">
-            <p id="FlashCardContent" class="title-h2">${arrayCards[0].question}</p>
+            <p id="FlashCardContent" class="title-h2">${arrayCards[actualCardCounter].question}</p>
             <img id="slackIcon" src="./SVG/slack.svg" alt="slack">
         </div>  
         <button id="ButtonWrong" class="WoRbutton buttonWrong">X</button>
@@ -106,27 +107,51 @@ function saveAlbum(){
         const FlashCard = document.getElementById("FlashCard");
         const flashCardContent = document.getElementById("FlashCardContent");
 
-    // Funciones de las Flash Cards
-        function getTheAnswer() {       
-            if (answerCounter%2 == 0) {
-              flashCardContent.textContent = arrayCards[0].answer;
-            } else {
-                flashCardContent.textContent = arrayCards[0].question;
+        // Funciones de las Flash Cards
+        function nextCard (){
+            answerCounter = 0;
+            actualCardCounter++;
+            if (actualCardCounter !== arrayCards.length) {
+                setTimeout(() => {
+                    FlashCard.style.backgroundColor = "var(--gray-90)";
+                    flashCardContent.textContent = arrayCards[actualCardCounter].question;
+                }, 500);
+            } else{
+                flashCardsContainer.innerHTML =  `
+                <div id="ResultsPage" class="resultsPage">
+                    <h2>Resultados</h2>
+                    <p class="subtitle">Cartas correctas <span>${rightCardsCounter}</span></p>
+                    <p class="subtitle">Cartas erroneas  <span>${wrongCardsCounter}</span></p>
+                    <button id="ResultadosButton" class="done-button">Volver a repasar</button>
+                </div>
+                `;
+                const ResultadosButton = document.getElementById("ResultadosButton");
+                ResultadosButton.addEventListener("click", asignCardsTemplate );
             }
-            FlashCard.classList.toggle("answer");
+        }
+
+
+        function getTheAnswer() {    
+            if (answerCounter%2 == 0) {
+                FlashCard.style.backgroundColor = "var(--gray-80)";
+                flashCardContent.textContent = arrayCards[actualCardCounter].answer;
+            } else {
+                FlashCard.style.backgroundColor = "var(--gray-90)";
+                flashCardContent.textContent = arrayCards[actualCardCounter].question;
+            }
             answerCounter++;
         }
         function wrongAnswer(){
-            FlashCard.classList.add("wrongAnswer");
-            wrongCards.push(arrayCards[0]);
-
+            FlashCard.style.backgroundColor = "var(--red)";
+            // wrongCards.push(arrayCards[actualCardCounter]);
+            wrongCardsCounter++;
+            nextCard();
         }
         function rightAnswer(){
-            FlashCard.classList.add("rightAnswer");
-            rightCards.push(arrayCards[0]);
-            console.log(rightCards);
-            rightCards.push("Si funciona");
-            console.log(rightCards);
+            FlashCard.style.backgroundColor = "var(--green)";
+            // rightCards.push(arrayCards[actualCardCounter]);
+            rightCardsCounter++;
+            nextCard();
         }
     }
 
@@ -240,20 +265,6 @@ function saveAlbum(){
                     }
                 });
 
-                CreateFlashCardsButton.addEventListener("click", function() {
-                    const frontValue = FrontPartInput.value.trim();
-                    const backValue = BackPartInput.value.trim();
-
-                    if (frontValue !== "" && backValue !== "") {
-                        // Realiza aquí cualquier acción que deseas cuando se hace clic en el botón
-                        console.log("Botón 'Guardar' presionado con contenido en ambos campos.");
-                    } else {
-                        // Muestra un mensaje de error o realiza otra acción si los campos están vacíos
-                        console.log("Ambos campos deben tener contenido.");
-                    }
-                });
-
-
                 function goBackToAlbum(){
                     console.log("Go back to the album");
                     
@@ -290,7 +301,6 @@ function saveAlbum(){
                         }
                     );
                     
-                    console.log(arrayCards);
 
                     asignCardsTemplate();
             
@@ -307,3 +317,5 @@ function saveAlbum(){
 
 albumCreatorContainer.addEventListener("click", closeOverlay);
 createButton.addEventListener('click', openAlbumCreator);
+
+
