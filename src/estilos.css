@@ -68,7 +68,7 @@
 }
 .done-button {
     justify-self: center;
-    width: 80%;
+    width: 90%;
     height: 50px;
     border: none;
     border-radius: 10px;
@@ -138,11 +138,10 @@
 .overlay-album {
     justify-self: center;
     display: grid;
-    grid-template-rows: 60px 1fr 1fr 80px;
+    grid-template-rows: 60px 1fr 80px;
     position: fixed;
     bottom: -300px;
     width: 80vw;
-    height: 350px;
     list-style: none;
     border: 2px solid var(--gray-50);
     border-radius:10px ;
@@ -171,9 +170,9 @@
     margin-left: 20px ;
 }
 .AC-input {
-    width: 80%;
+    justify-self: center;
+    width: 90%;
     height: 50px;
-    margin-left: 20px;
 }
 
 .select-color-continer {
@@ -199,7 +198,7 @@
 .select-color:nth-child(6) {background-color: var(--yellow);}
 
 .button-AC {
-    margin-top: 10px;
+    align-self: center;
 }
 
 .library {
@@ -217,11 +216,10 @@
     height: 100px;
     border-radius: 5px;
     border: 2px solid var(--gray-30);
-    background-color: var(--pink);
+    color: var(--gray-30);
 }
 .album h4{
     margin-left: 20px ;
-    color: var(--black);
 }
 .album img{
     position: absolute;
@@ -232,7 +230,6 @@
     margin-right: 40px;
     font-size: 28px;
     font-weight: bold;
-    color: var(--black);
 }
 
 .album:hover {
@@ -354,6 +351,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    text-align: center;
     margin-top: 20px;
     width: 80%;
     height: 320px;

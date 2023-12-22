@@ -5,7 +5,6 @@ const albumSlide = document.getElementById('AlbumSlide');
 
 class Album {
     constructor (name){
-        self = this;
         this.name = name;
         this.arrayCards = [];
         this.counter = 0;
@@ -29,13 +28,7 @@ class Album {
         const albumName = document.getElementById("albumName");
         var albumNameValue = albumName.textContent;
         console.log("Abrindo album " + albumNameValue);
-    
-        function assignEvLis(){
-            const backArrowIcon_Album = document.getElementById("BackArrowIcon_Album");
-            const newFlashCardButton = document.getElementById("NewFlashCardButton");
-            backArrowIcon_Album.addEventListener("click", goBackToMain);
-            newFlashCardButton.addEventListener("click", createFlashCards);    
-        }
+
         function goBackToMain(){
             console.log("Cerrando album");
             albumSlide.innerHTML = "";
@@ -155,13 +148,12 @@ class Album {
                     <p class="subtitle">Crear cartas</p>
                     <img src="./SVG/pus-Icon.svg" alt="plus icon">
                 </div>
-            `;
-            assignEvLis();
+            `;            
+            const newFlashCardButton = document.getElementById("NewFlashCardButton");
+            newFlashCardButton.addEventListener("click", createFlashCards);    
         }
-        else {
-            // Creo que esta parte esta mal, creo que no deveria de llevar el this. ?
-            // Checar más tarde
-            this.asignCardsTemplate;
+        else if(this.counter > 0){
+            this.asignCardsTemplate.bind(this)();
         } 
            
     }
@@ -171,13 +163,13 @@ class Album {
         this.wrongCardsCounter = 0;
         this.rightCardsCounter = 0;
         const self = this;
-        const flashCardsContainer = document.getElementById("FlashCardsContainer");
         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!",this.arrayCards)
-        flashCardsContainer.innerHTML =  `
+        const flashCardsContainer = document.getElementById("FlashCardsContainer");
+        flashCardsContainer.innerHTML = `
         <div id="FlashCard" class="flashCard">
             <p id="FlashCardContent" class="title-h2">${this.arrayCards[this.actualCardCounter].question}</p>
             <img id="slackIcon" src="./SVG/slack.svg" alt="slack">
-        </div>  
+        </div> 
         <button id="ButtonWrong" class="WoRbutton buttonWrong">X</button>
         <button id="ButtonRight" class="WoRbutton buttonRight">V</button>
         `;
@@ -204,19 +196,23 @@ class Album {
             } else{
                 self.results()
             }
+            if (self.answerCounter%2 == 1){
+                self.answerCounter++;
+            }
         }
         function getTheAnswer() {    
             if (self.answerCounter%2 == 0) {
                 FlashCard.style.backgroundColor = "var(--gray-80)";
                 flashCardContent.textContent = self.arrayCards[self.actualCardCounter].answer;
-                console.log("RESPUESTA")
+                console.log("RESPUESTA");
+                self.answerCounter++;
 
             } else {
                 FlashCard.style.backgroundColor = "var(--gray-90)";
                 flashCardContent.textContent = self.arrayCards[self.actualCardCounter].question;
-                console.log("Pregunta")
+                console.log("Pregunta");
+                self.answerCounter++;
             }
-            self.answerCounter++;
         }
         function wrongAnswer(){
             FlashCard.style.backgroundColor = "var(--red)";
@@ -255,20 +251,21 @@ function openAlbumCreator() {
                 <p class="content">Nombre del album</p>
                 <input id='nameAlbumInput' class="principal-input AC-input" type="text">
             </li>
-            <li class='AC-inputs-container'>
-                <p class="content ">Fondo del album</p>
-                <ul class="select-color-continer">
-                    <li class="select-color"></li>
-                    <li class="select-color"></li>
-                    <li class="select-color"></li>
-                    <li class="select-color"></li>
-                    <li class="select-color"></li>
-                    <li class="select-color"></li>
-                </ul>
-            </li>
+
             <button id='doneAlbumCreatorButton' class="done-button button-AC">Create</button>
         </ul>
     `;
+    // <li class='AC-inputs-container'>
+    // <p class="content ">Fondo del album</p>
+    //     <ul class="select-color-continer">
+    //         <li class="select-color"></li>
+    //         <li class="select-color"></li>
+    //         <li class="select-color"></li>
+    //         <li class="select-color"></li>
+    //         <li class="select-color"></li>
+    //         <li class="select-color"></li>
+    //     </ul>
+    // </li>
     const albumCreator = document.getElementById("albumCreator");
     const doneAlbumCreatorButton = document.getElementById("doneAlbumCreatorButton");
     const nameAlbumInput = document.getElementById("nameAlbumInput");
@@ -300,19 +297,9 @@ function closeOverlayTransition(){
         albumCreatorContainer.innerHTML= '';
     }, 350);
 }
-
-
-
-
-albumCreatorContainer.addEventListener("click", closeOverlay);
-createButton.addEventListener('click', openAlbumCreator);
-
-
-
-
 function saveAlbum(){
-    var nameAlbumInput_Value = nameAlbumInput.value;
-    const myAlbum = new Album(nameAlbumInput_Value);
+    const nameAlbumInput_Value = nameAlbumInput.value;
+    var myAlbum = new Album(nameAlbumInput_Value);
 
     albumLibrary.insertAdjacentHTML("afterbegin", `
     <li class="album">
@@ -325,5 +312,12 @@ function saveAlbum(){
 
 
     const album = document.querySelector(".album");
-    album.addEventListener("click", myAlbum.openAlbum());
+    album.addEventListener("click", function() {
+        myAlbum.openAlbum();
+       });
 }
+
+
+albumCreatorContainer.addEventListener("click", closeOverlay);
+createButton.addEventListener('click', openAlbumCreator);
+
