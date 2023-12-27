@@ -167,8 +167,8 @@ class Album {
         const flashCardsContainer = document.getElementById("FlashCardsContainer");
         flashCardsContainer.innerHTML = `
         <div id="FlashCard" class="flashCard">
-            <p id="FlashCardContent" class="title-h2">${this.arrayCards[this.actualCardCounter].question}</p>
-            <img id="slackIcon" src="./SVG/slack.svg" alt="slack">
+            <p id="FlashCardContent" class=" title-h2">${this.arrayCards[this.actualCardCounter].question}</p>
+            <img id="slackIcon"  src="./SVG/slack.svg" alt="slack">
         </div> 
         <button id="ButtonWrong" class="WoRbutton buttonWrong">X</button>
         <button id="ButtonRight" class="WoRbutton buttonRight">V</button>
@@ -187,41 +187,58 @@ class Album {
         // Funciones de las Flash Cards
         function nextCard (){
             self.actualCardCounter++;
-            if (self.actualCardCounter !== self.arrayCards.length) {
-                setTimeout(() => {
-                    FlashCard.style.backgroundColor = "var(--gray-90)";
+            setTimeout(() => {
+                if (self.actualCardCounter !== self.arrayCards.length) {
+                    FlashCard.style.borderColor = "var(--gray-70)";
                     flashCardContent.textContent = self.arrayCards[self.actualCardCounter].question;
-                }, 500);
-                console.log("NEXT")
-            } else{
-                self.results()
-            }
+                    console.log("NEXT")
+                } else{
+                    setTimeout(() => {
+                        self.results();
+                    }, 250);
+                }
+            }, 500);
             if (self.answerCounter%2 == 1){
                 self.answerCounter++;
+                setTimeout(() => {
+                    FlashCard.classList.add("flip-vertical-left");
+                    FlashCard.classList.remove("flip-vertical-right");
+                }, 250);
             }
         }
-        function getTheAnswer() {    
+        function getTheAnswer() { 
             if (self.answerCounter%2 == 0) {
-                FlashCard.style.backgroundColor = "var(--gray-80)";
                 flashCardContent.textContent = self.arrayCards[self.actualCardCounter].answer;
+                flashCardContent.classList.add("flashCard-invert");
+                flashCardContent.classList.add("flashCard-fadeIn");
+                flashCardContent.addEventListener("animationend", () => {
+                    flashCardContent.classList.remove("flashCard-fadeIn");
+                });
+                FlashCard.classList.add("flip-vertical-right");
+                FlashCard.classList.remove("flip-vertical-left");
                 console.log("RESPUESTA");
                 self.answerCounter++;
 
             } else {
-                FlashCard.style.backgroundColor = "var(--gray-90)";
                 flashCardContent.textContent = self.arrayCards[self.actualCardCounter].question;
+                flashCardContent.classList.add("flashCard-fadeIn");
+                flashCardContent.addEventListener("animationend", () => {
+                    flashCardContent.classList.remove("flashCard-fadeIn");
+                 });
+                 FlashCard.classList.add("flip-vertical-left");
+                 FlashCard.classList.remove("flip-vertical-right");
                 console.log("Pregunta");
                 self.answerCounter++;
             }
         }
         function wrongAnswer(){
-            FlashCard.style.backgroundColor = "var(--red)";
+            FlashCard.style.borderColor = "var(--red)";
             self.wrongCardsCounter++;
             console.log("MALA RES!!!")
             nextCard();
         }
         function rightAnswer(){
-            FlashCard.style.backgroundColor = "var(--green)";
+            FlashCard.style.borderColor = "var(--green)";
             self.rightCardsCounter++;
             console.log("buena RES!!!")
             nextCard();
@@ -255,17 +272,6 @@ function openAlbumCreator() {
             <button id='doneAlbumCreatorButton' class="done-button button-AC">Create</button>
         </ul>
     `;
-    // <li class='AC-inputs-container'>
-    // <p class="content ">Fondo del album</p>
-    //     <ul class="select-color-continer">
-    //         <li class="select-color"></li>
-    //         <li class="select-color"></li>
-    //         <li class="select-color"></li>
-    //         <li class="select-color"></li>
-    //         <li class="select-color"></li>
-    //         <li class="select-color"></li>
-    //     </ul>
-    // </li>
     const albumCreator = document.getElementById("albumCreator");
     const doneAlbumCreatorButton = document.getElementById("doneAlbumCreatorButton");
     const nameAlbumInput = document.getElementById("nameAlbumInput");
@@ -284,11 +290,6 @@ function openAlbumCreator() {
 }
 
 
-function closeOverlay(event) {
-    if (event.target === albumCreatorContainer) {
-        closeOverlayTransition();
-    }
-}
 function closeOverlayTransition(){
     albumCreator.classList.add('move-out'); 
     setTimeout(() => {
@@ -297,6 +298,11 @@ function closeOverlayTransition(){
         albumCreatorContainer.innerHTML= '';
     }, 350);
 }
+function closeOverlay(event) {
+    if (event.target === albumCreatorContainer) {
+        closeOverlayTransition();
+    }
+}
 function saveAlbum(){
     const nameAlbumInput_Value = nameAlbumInput.value;
     var myAlbum = new Album(nameAlbumInput_Value);
@@ -304,7 +310,7 @@ function saveAlbum(){
     albumLibrary.insertAdjacentHTML("afterbegin", `
     <li class="album">
         <h4 id="albumName" class="title-h2">${myAlbum.name}</h4>
-        <p id="albumCounter" class="albumCounter">0/${myAlbum.counter}</p>
+        <p id="albumCounter" class="albumCounter">${myAlbum.counter}</p>
     </li>
     `); 
 
