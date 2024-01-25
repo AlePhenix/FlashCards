@@ -327,3 +327,12 @@ function saveAlbum(){
 albumCreatorContainer.addEventListener("click", closeOverlay);
 createButton.addEventListener('click', openAlbumCreator);
 
+
+var myAlbum = new Album("UNAM");
+
+albumLibrary.insertAdjacentHTML("afterbegin", `
+<li class="album">
+    <h4 id="albumName" class="title-h2">Ingles    UNAM</h4>
+    <p id="albumCounter" class="albumCounter">${myAlbum.counter}</p>
+</li>
+`); 
