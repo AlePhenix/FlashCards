@@ -22,6 +22,8 @@
     --yellow: #FCE79E;
     --red: #ffaaba; 
 
+    --blue-unam: #3d59f2;
+
     --principal-LG:  linear-gradient(215deg, #5481db 0%, #7a49ca 100%);
     --secundary-LG:  linear-gradient(215deg, #4994da 0%, #a057d8 100%);
 
@@ -56,8 +58,8 @@
     color: var(--wihte);
 }
 .icon {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
 }
 .principal-input {
     padding: 0 10px 0 10px;
@@ -100,10 +102,24 @@
 .flip-vertical-left {
 	animation: flip-vertical-left  0.4s ease-in-out both;
 }
-#body {
-    overflow: hidden;
-}
 
+
+
+
+header {
+    background-color: var(--font);
+}
+#createCardButton {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    height: 30px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 0px;
+    background: var(--principal-LG);
+    color: var(--wihte);
+}
 
 #main {
     display: grid;
@@ -111,6 +127,7 @@
     grid-template-rows: 300px 1fr;
     width: 100vw;
     height: 100vh;
+    padding: 20px;
     background-color: var(--font);
 }
 
@@ -127,13 +144,7 @@
     margin: 40px 0 80px 0;
 }
 
-#createCardButton {
-    width: 80vw;
-    height: 100px;
-    border-radius: 5px;
-    border: 2px solid var(--gray-30);
-    background-color: var(--transparent-bk);
-}
+
 
 #createCardButton:hover {
     background-color: var(--transparent-bk-select);
@@ -201,14 +212,13 @@
     border: 2px solid var(--gray-30);
     color: var(--gray-30);
 }
+.album_UNAM {
+    background-color: var(--blue-unam);
+}
 .album h4{
     margin-left: 20px ;
 }
-.album img{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
+
 .albumCounter {
     margin-right: 40px;
     font-size: 28px;
@@ -237,7 +247,7 @@
     align-items: center;
     position: relative;
     width: 100%;
-    height: 50px;
+    height: 100px;
     padding: 20px;
 }
 .albumSlideHeader .headerSection{
@@ -245,7 +255,6 @@
     justify-content: space-between;
     align-items: center;
     height: 30px;
-
 }
 
 

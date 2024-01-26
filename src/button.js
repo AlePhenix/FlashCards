@@ -3,6 +3,61 @@ const albumCreatorContainer = document.getElementById('albumCreatorContainer');
 const albumLibrary = document.getElementById('library');
 const albumSlide = document.getElementById('AlbumSlide');
 
+// Lista de vervos a usar como ejemplo 
+const listVerbs = [
+    { question: 'be', answer: 'ser/estar' },
+    { question: 'have', answer: 'tener' },
+    { question: 'do', answer: 'hacer' },
+    { question: 'say', answer: 'decir' },
+    { question: 'get', answer: 'obtener' },
+    { question: 'make', answer: 'hacer' },
+    { question: 'go', answer: 'ir' },
+    { question: 'know', answer: 'saber/conocer' },
+    { question: 'take', answer: 'tomar' },
+    { question: 'see', answer: 'ver' },
+    { question: 'come', answer: 'venir' },
+    { question: 'think', answer: 'pensar' },
+    { question: 'look', answer: 'mirar' },
+    { question: 'want', answer: 'querer' },
+    { question: 'give', answer: 'dar' },
+    { question: 'use', answer: 'usar' },
+    { question: 'find', answer: 'encontrar' },
+    { question: 'tell', answer: 'decir/informar' },
+    { question: 'ask', answer: 'preguntar' },
+    { question: 'work', answer: 'trabajar' },
+    { question: 'seem', answer: 'parecer' },
+    { question: 'try', answer: 'intentar' },
+    { question: 'leave', answer: 'salir/dejar' },
+    { question: 'call', answer: 'llamar' },
+    { question: 'need', answer: 'necesitar' },
+    { question: 'try', answer: 'intentar' },
+    { question: 'ask', answer: 'preguntar' },
+    { question: 'tell', answer: 'decir/informar' },
+    { question: 'become', answer: 'volverse/llegar a ser' },
+    { question: 'show', answer: 'mostrar' },
+    { question: 'play', answer: 'jugar/tocar' },
+    { question: 'move', answer: 'moverse' },
+    { question: 'like', answer: 'gustar' },
+    { question: 'help', answer: 'ayudar' },
+    { question: 'put', answer: 'poner' },
+    { question: 'take', answer: 'tomar' },
+    { question: 'follow', answer: 'seguir' },
+    { question: 'change', answer: 'cambiar' },
+    { question: 'believe', answer: 'creer' },
+    { question: 'watch', answer: 'mirar/ver' },
+    { question: 'try', answer: 'intentar' },
+    { question: 'talk', answer: 'hablar' },
+    { question: 'turn', answer: 'girar' },
+    { question: 'start', answer: 'comenzar' },
+    { question: 'show', answer: 'mostrar' },
+    { question: 'hear', answer: 'oír' },
+    { question: 'play', answer: 'jugar/tocar' },
+    { question: 'run', answer: 'correr' },
+    { question: 'move', answer: 'moverse' },
+    { question: 'like', answer: 'gustar' },
+]
+
+// Clase constructora del Album
 class Album {
     constructor (name){
         this.name = name;
@@ -12,6 +67,14 @@ class Album {
         this.answerCounter = 0;
         this.wrongCardsCounter = 0;
         this.rightCardsCounter = 0;
+    }
+    UNAM_Verbs (){
+        this.arrayCards = listVerbs;
+
+        this.counter = this.arrayCards.length;
+
+        this.openAlbum();
+        console.log("bamo bien")
     }
     counterPlus(){
         this.counter++;
@@ -24,6 +87,7 @@ class Album {
         console.log("Si jala todo bn")
     }
     openAlbum(){
+        console.log("esto si funciona")
         const self = this;
         const albumName = document.getElementById("albumName");
         var albumNameValue = albumName.textContent;
@@ -328,11 +392,19 @@ albumCreatorContainer.addEventListener("click", closeOverlay);
 createButton.addEventListener('click', openAlbumCreator);
 
 
-var myAlbum = new Album("UNAM");
+
+
+// Agregamos el Album predeterminado de los verbos en ingles
+var myAlbumUNAM = new Album("UNAM");
 
 albumLibrary.insertAdjacentHTML("afterbegin", `
-<li class="album">
-    <h4 id="albumName" class="title-h2">Ingles    UNAM</h4>
-    <p id="albumCounter" class="albumCounter">${myAlbum.counter}</p>
+<li class="album_UNAM album">
+    <h4 id="albumName" class="title-h2">UNAM</h4>
+    <p id="albumCounter" class="albumCounter">50</p>
 </li>
 `); 
+
+const album = document.querySelector(".album_UNAM");
+album.addEventListener("click", function() {
+    myAlbumUNAM.UNAM_Verbs();
+   });
