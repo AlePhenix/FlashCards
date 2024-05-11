@@ -57,6 +57,60 @@ const listVerbs = [
     { question: 'like', answer: 'gustar' },
 ]
 
+const listPlaces = [
+    { question: 'Home', answer: 'Hogar' },
+    { question: 'School', answer: 'Escuela' },
+    { question: 'Park', answer: 'Parque' },
+    { question: 'Hospital', answer: 'Hospital' },
+    { question: 'Restaurant', answer: 'Restaurante' },
+    { question: 'Library', answer: 'Biblioteca' },
+    { question: 'Beach', answer: 'Playa' },
+    { question: 'Office', answer: 'Oficina' },
+    { question: 'Store', answer: 'Tienda' },
+    { question: 'Gym', answer: 'Gimnasio' },
+    { question: 'Church', answer: 'Iglesia' },
+    { question: 'Airport', answer: 'Aeropuerto' },
+    { question: 'Hotel', answer: 'Hotel' },
+    { question: 'Stadium', answer: 'Estadio' },
+    { question: 'Museum', answer: 'Museo' },
+    { question: 'Cinema', answer: 'Cine' },
+    { question: 'Bank', answer: 'Banco' },
+    { question: 'Zoo', answer: 'Zoológico' },
+    { question: 'Cafe', answer: 'Café' },
+    { question: 'Farm', answer: 'Granja' },
+    { question: 'Post Office', answer: 'Oficina de correos' },
+    { question: 'Theater', answer: 'Teatro' },
+    { question: 'Supermarket', answer: 'Supermercado' },
+    { question: 'Mall', answer: 'Centro comercial' },
+    { question: 'College', answer: 'Universidad' },
+    { question: 'Stadium', answer: 'Estadio' },
+    { question: 'Bar', answer: 'Bar' },
+    { question: 'Mosque', answer: 'Mezquita' },
+    { question: 'Synagogue', answer: 'Sinagoga' },
+    { question: 'Gas Station', answer: 'Gasolinera' },
+    { question: 'Beach', answer: 'Playa' },
+    { question: 'River', answer: 'Río' },
+    { question: 'Lake', answer: 'Lago' },
+    { question: 'Mountain', answer: 'Montaña' },
+    { question: 'Hill', answer: 'Colina' },
+    { question: 'Forest', answer: 'Bosque' },
+    { question: 'Desert', answer: 'Desierto' },
+    { question: 'Island', answer: 'Isla' },
+    { question: 'City', answer: 'Ciudad' },
+    { question: 'Town', answer: 'Pueblo' },
+    { question: 'Village', answer: 'Aldea' },
+    { question: 'Street', answer: 'Calle' },
+    { question: 'Square', answer: 'Plaza' },
+    { question: 'Bridge', answer: 'Puente' },
+    { question: 'Subway', answer: 'Metro' },
+    { question: 'Bus Stop', answer: 'Parada de autobús' },
+    { question: 'Train Station', answer: 'Estación de tren' },
+    { question: 'Port', answer: 'Puerto' },
+    { question: 'Garden', answer: 'Jardín' },
+    { question: 'Playground', answer: 'Parque infantil' }
+];
+
+
 // Clase constructora del Album
 class Album {
     constructor (name){
@@ -68,13 +122,54 @@ class Album {
         this.wrongCardsCounter = 0;
         this.rightCardsCounter = 0;
     }
+
     UNAM_Verbs (){
-        this.arrayCards = listVerbs;
+        function seleccionarCartasAleatorias(list){
+            if (list.length < 12) {
+                console.log("La lista debe contener al menos 12 números.");
+                return [];
+            }   
+            let numerosSeleccionados = [];
+            
+            while (numerosSeleccionados.length < 12) {
+                let numeroAleatorio = Math.floor(Math.random() * list.length);
+                if (!numerosSeleccionados.includes(list[numeroAleatorio])) {
+                    numerosSeleccionados.push(list[numeroAleatorio]);
+                }
+            }
+            
+            return numerosSeleccionados;
+        }
+
+        this.arrayCards = seleccionarCartasAleatorias(listVerbs);
 
         this.counter = this.arrayCards.length;
 
         this.openAlbum();
-        console.log("bamo bien")
+    }
+    UNAM_Places (){
+        function seleccionarCartasAleatorias(list){
+            if (list.length < 12) {
+                console.log("La lista debe contener al menos 12 números.");
+                return [];
+            }   
+            let numerosSeleccionados = [];
+            
+            while (numerosSeleccionados.length < 12) {
+                let numeroAleatorio = Math.floor(Math.random() * list.length);
+                if (!numerosSeleccionados.includes(list[numeroAleatorio])) {
+                    numerosSeleccionados.push(list[numeroAleatorio]);
+                }
+            }
+            
+            return numerosSeleccionados;
+        }
+
+        this.arrayCards = seleccionarCartasAleatorias(listPlaces);
+
+        this.counter = this.arrayCards.length;
+
+        this.openAlbum();
     }
     counterPlus(){
         this.counter++;
@@ -87,7 +182,6 @@ class Album {
         console.log("Si jala todo bn")
     }
     openAlbum(){
-        console.log("esto si funciona")
         const self = this;
         const albumName = document.getElementById("albumName");
         var albumNameValue = albumName.textContent;
@@ -221,13 +315,25 @@ class Album {
         } 
            
     }
+    // En esta parte se agregan las cartas en la pantalla del usuario
+    //
+
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
     asignCardsTemplate(){
         this.actualCardCounter = 0;
         this.answerCounter = 0;
         this.wrongCardsCounter = 0;
         this.rightCardsCounter = 0;
         const self = this;
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!",this.arrayCards)
+
         const flashCardsContainer = document.getElementById("FlashCardsContainer");
         flashCardsContainer.innerHTML = `
         <div id="FlashCard" class="flashCard">
@@ -269,6 +375,13 @@ class Album {
                     FlashCard.classList.remove("flip-vertical-right");
                 }, 250);
             }
+            // tenemos que hacer una lista 
+            // primero vamos a pedir el numero de cartas que tiene el album
+            //luego, escogemos un numero aleatorio del 0 a N
+            //cada vez que cambiemos de carta NextCard() agregamos el numero actual a una lista 
+            // escogemos otro numero aleatorio que no este dentro de la lista
+            // asi hasta que ya no quede lleguemos a 12 numeros
+            //si hay mas no importa, terminamos allí
         }
         function getTheAnswer() { 
             if (self.answerCounter%2 == 0) {
@@ -319,7 +432,14 @@ class Album {
         </div>
         `; 
         const ResultadosButton = document.getElementById("ResultadosButton");
-        ResultadosButton.addEventListener("click", this.asignCardsTemplate.bind(this)); // Corrección aquí: Uso de bind para mantener el contexto de la clase
+        ResultadosButton.addEventListener("click", () => {
+            this.arrayCards = [];
+            this.UNAM_Verbs()();
+            this.asignCardsTemplate.bind(this)();
+
+
+        });
+
     }
 }
 
@@ -395,16 +515,72 @@ createButton.addEventListener('click', openAlbumCreator);
 
 
 // Agregamos el Album predeterminado de los verbos en ingles
-var myAlbumUNAM = new Album("UNAM");
+var Verbs_UNAM_Album = new Album("Verbs");
+var Places_UNAM_Album = new Album("Places");
 
 albumLibrary.insertAdjacentHTML("afterbegin", `
-<li class="album_UNAM album">
-    <h4 id="albumName" class="title-h2">UNAM</h4>
-    <p id="albumCounter" class="albumCounter">50</p>
+<li class="album album_UNAM">
+    <h4 id="albumName" class="title-h2 Verbs_UNAM">Verbs</h4>
+    <img src="./images/menu-hamburguesa.png" alt="" onclick='openAlbumMenu()' class='menuAlbum'>
+    <ul id="albumMenuOverlay" class="none">
+        <li>    
+            <p>random card</p>
+        </li>
+        <li>
+            <p>reordenar cartas</p>
+        </li>
+        <li>
+            <p>dificultad</p>
+            <ul>
+                <li>facil</li>
+                <li>media</li>
+                <li>dificil</li>
+            </ul>
+        </li>
+        <li>
+            <button>Guardar Cambios</button>
+        </li>
+    </ul>
+</li>
+<li class="Places_UNAM album album_UNAM">
+    <h4 id="albumName" class="title-h2">Places</h4>
+    <img src="./images/menu-hamburguesa.png" alt="" onclick='openAlbumMenu()' class='menuAlbum'>
 </li>
 `); 
 
-const album = document.querySelector(".album_UNAM");
-album.addEventListener("click", function() {
-    myAlbumUNAM.UNAM_Verbs();
-   });
+const Verbs_UNAM = document.querySelector(".Verbs_UNAM");
+Verbs_UNAM.addEventListener("click", function() {
+    Verbs_UNAM_Album.UNAM_Verbs();
+});
+
+
+const Places_UNAM = document.querySelector(".Places_UNAM");
+Places_UNAM.addEventListener("click", function() {
+    // cambiamos esta parte y generamos una para los lugares
+    Places_UNAM_Album.UNAM_Places();
+});
+
+
+const album_Menu_Overlay = document.getElementById("albumMenuOverlay");
+const album= document.querySelectorAll(".album")
+function openAlbumMenu(){
+    album_Menu_Overlay.classList.toggle("none")
+    album[0].classList.toggle("album_menu")
+    console.log("Se escucha")
+}
+
+// Agregar un apartado de edición de album
+// -Poder acomodar las flashcards
+// -seleccionar el tipo de orden de las Cartas LINEAL o RANDOM
+// 
+// -Color del album
+
+// seccionar las flashcards en grupos de 15 a 20 cartas para que la informacion sea mas digerible
+//Que las cartas aparescan con un orden RANDOM
+
+
+
+//intentar implementar imagenes
+
+
+// Otra opcion seria no tener el menú y solo hacer funcional la app

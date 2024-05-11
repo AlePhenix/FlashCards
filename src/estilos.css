@@ -22,7 +22,7 @@
     --yellow: #FCE79E;
     --red: #ffaaba; 
 
-    --blue-unam: #3d59f2;
+    --blue-unam: #4056d1;
 
     --principal-LG:  linear-gradient(215deg, #5481db 0%, #7a49ca 100%);
     --secundary-LG:  linear-gradient(215deg, #4994da 0%, #a057d8 100%);
@@ -35,7 +35,12 @@
     margin:0;
     padding:0;
 }
+body {
+    background-color: var(--black);
+}
+
 .none  {display: none;}
+
 .title-h1 {
     font-size: 40px;
     font-weight: 600;
@@ -107,36 +112,50 @@
 
 
 header {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    padding: 15px 10px;
+    border-bottom: .5px solid var(--gray-70) ;
     background-color: var(--font);
 }
+.linkGithub {
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--wihte);
+}
+.linkGithub:hover{
+    text-decoration: underline;
+    color: var(--gray-30);
+}
+
 #createCardButton {
-    position: absolute;
-    right: 20px;
-    top: 20px;
     height: 30px;
     padding: 5px;
-    border-radius: 5px;
     border: 0px;
-    background: var(--principal-LG);
+    background: var(--font);
     color: var(--wihte);
+}
+
+#createCardButton:hover {
+    text-decoration: underline;
+    color: var(--gray-30);
 }
 
 #main {
     display: grid;
     justify-content: center;
-    grid-template-rows: 300px 1fr;
+    grid-template-rows: 350px 1fr;
     width: 100vw;
-    height: 100vh;
-    padding: 20px;
     background-color: var(--font);
 }
 
 .presentation-container {
-    align-self: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: end;
     text-align: center;
 }
 
@@ -144,11 +163,6 @@ header {
     margin: 40px 0 80px 0;
 }
 
-
-
-#createCardButton:hover {
-    background-color: var(--transparent-bk-select);
-}
 
 .overlay-album {
     justify-self: center;
@@ -158,7 +172,7 @@ header {
     bottom: -300px;
     width: 80vw;
     list-style: none;
-    border: 2px solid var(--gray-50);
+    border: 1px solid var(--gray-50);
     border-radius:10px ;
     background-color: var(--gray-90) ;
     animation-name: move-in;
@@ -197,12 +211,14 @@ header {
 .library {
     display: flex;
     flex-wrap: wrap;
+    align-content: start;
     justify-content: center;
     gap: 20px;
     list-style: none;
 }
 .album {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     position: relative;
@@ -218,11 +234,12 @@ header {
 .album h4{
     margin-left: 20px ;
 }
-
-.albumCounter {
-    margin-right: 40px;
-    font-size: 28px;
-    font-weight: bold;
+.menuAlbum {
+    width: 30px;
+    margin-right: 20px;
+}
+.album_menu {
+    height: 350px;
 }
 
 .album:hover {
@@ -230,7 +247,17 @@ header {
 }
 
 
-
+#albumMenuOverlay {
+    list-style:none;
+    margin-left: 20px;
+    color: var(--wihte);
+}
+#albumMenuOverlay li {
+    padding: 5px;
+}
+#albumMenuOverlay ul{
+    list-style: none;
+}
 
 .albumPage {
     position: absolute;
